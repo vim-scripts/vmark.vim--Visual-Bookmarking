@@ -1,0 +1,23 @@
+This is a mirror of http://www.vim.org/scripts/script.php?script_id=4076
+
+Uasge:
+   Normal Mode
+     mm     Toggle visual bookmark current line
+     ma     Remove all bookmarks
+     mn     Move to next bookmark below current line.  Will wrap around at end.
+     <F2>   Same as above (mn)
+     mp     Move to previous bookmark above current line.  Will wrap around at top.
+     <F3>   Same as above (mp)
+
+Configuration:
+     b:vm_maxmarks - Max number of bookmarks allowed in a buffer
+     b:vm_guifg    - Foreground color for bookmarked line in GVIM
+     b:vm_guibg    - Background color for bookmarked line in GVIM
+     b:vm_ctermfg  - Foreground color for bookmarked line in VIM
+     b:vm_ctermbg  - Background color for bookmarked line in VIM
+
+Limitation:
+   If syntax highlighting based on keywords is turned on and the line being bookmarked starts with a keyword, the keyword may not be highlighted but the rest of the line after the keyword should be highlighted normally.
+
+Acknowledgement:
+   Took cues from Amit Sethi's highlight.vim (http://www.vim.org/scripts/script.php?script_id=1599)
