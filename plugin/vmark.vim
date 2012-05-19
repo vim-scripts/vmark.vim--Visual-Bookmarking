@@ -36,6 +36,7 @@
 
 " Toggle bookmark on current line
 function! <SID>VMarkToggle()
+    call s:InitVMarkVariables()
     let lineno = line(".")
     if count(b:vm_markedlines, lineno) > 0
         call s:VMarkClear(lineno)
@@ -85,6 +86,7 @@ endfunction
 
 " Clear all bookmarks
 function! <SID>VMarkClearAll()
+    call s:InitVMarkVariables()
     if len(b:vm_markedlines) == 0
         echo "No bookmarks found."
     else
@@ -105,6 +107,7 @@ endfunction
 " Move to next bookmark below current line.
 " Will wrap around at last bookmark.
 function! <SID>VMarkNext()
+    call s:InitVMarkVariables()
     if empty(b:vm_markedlines)
         echo "No bookmarks found."
         return
@@ -135,6 +138,7 @@ endfunction
 " Move to previous bookmark.
 " Will wrap around at first bookmark.
 function! <SID>VMarkPrevious()
+    call s:InitVMarkVariables()
     if empty(b:vm_markedlines)
         echo "No bookmarks found."
         return
