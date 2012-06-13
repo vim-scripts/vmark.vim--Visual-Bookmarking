@@ -1,7 +1,7 @@
 " File: vmark.vim
 " Author: Michael Zhou <michael.zhou@gmail.com>
-" Version: 1.0
-" Last Modified: Fri May 18 10:58:02 EDT 2012
+" Version: 1.2
+" Last Modified: Wed Jun 13 17:07:08 EDT 2012
 " Description: Toggle visual bookmarks and jump through bookmarks
 " Uasge:
 "   Normal Mode
@@ -222,6 +222,21 @@ function! s:InitVMarkVariables()
     endif
 endfunction
 
+" Highlight all marked lines
+function! s:VMarkHighlightAll()
+    call s:InitVMarkVariables()
+    let cnt = len(b:vm_markedlines)
+    if cnt != 0
+        let idx = 0
+        while idx < cnt
+            let lineno = b:vm_markedlines[idx]
+            let c = b:vm_linecolormapping[lineno]
+            exec 'syn match '.c.' ".*\%'.lineno.'l.*" containedin=ALL'
+            let idx = idx + 1
+        endwhile
+    endif
+endfunction
+
 " Numeric number comparison function
 " Surprised that VIM does not have a built-in
 function! s:NumComparator(i1, i2)
@@ -238,3 +253,6 @@ nnoremap <silent> ma :call <sid>VMarkClearAll()<cr>
 
 " Initialization
 call s:InitVMarkVariables()
+
+" Highlight all marked lines when a buffer is loaded
+autocmd BufEnter * call s:VMarkHighlightAll()
